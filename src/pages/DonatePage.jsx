@@ -1,13 +1,59 @@
 /**
- * Donate Page Component
- * Interface for donors to contribute food
+ * Donate Page Component - Enhanced with Chat Interface
+ * Connects donors (families and businesses) with organizations
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import DonorChatModal from '../components/DonorChatModal';
 
 const DonatePage = () => {
   const navigate = useNavigate();
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  // Featured organizations from different areas
+  const featuredOrganizations = [
+    {
+      id: "2",
+      name: "St. Joseph Center",
+      area: "Venice",
+      address: "204 Hampton Drive, Venice, CA 90291",
+      phone: "(310) 396-6468",
+      website: "https://stjosephctr.org",
+      commonDistributions: ["Fresh produce", "Non-perishables", "Hygiene products"],
+      acceptsDonations: true,
+      pickupAvailable: true,
+      notes: "Serves people experiencing homelessness in West LA. Can coordinate pickup for larger donations.",
+      contact: "Call to coordinate donation pickup"
+    },
+    {
+      id: "7",
+      name: "Westside Food Bank",
+      area: "Santa Monica",
+      address: "1710 22nd Street, Santa Monica, CA 90404",
+      phone: "(310) 828-6016",
+      website: "https://www.wsfb.org",
+      commonDistributions: ["All food types", "Produce", "Frozen foods", "Shelf-stable goods"],
+      acceptsDonations: true,
+      pickupAvailable: true,
+      notes: "Primary food bank for West LA. Accepts large donations from grocery stores and restaurants. Has 'Extra Helpings' program for food recovery.",
+      contact: "Call (310) 828-6016 Ext. 20 for donation coordination"
+    },
+    {
+      id: "1",
+      name: "UCLA CPO Basic & Essential Needs Collective",
+      area: "UCLA/Westwood",
+      address: "220 Westwood Plaza, Suite 105, Los Angeles, CA 90095",
+      phone: "(310) 825-9090",
+      email: "foodcloset@cpo.ucla.edu",
+      website: "https://cpo.ucla.edu",
+      commonDistributions: ["Fresh produce", "Non-perishables", "Frozen foods", "Hygiene products"],
+      acceptsDonations: true,
+      pickupAvailable: false,
+      notes: "Serves UCLA students experiencing food insecurity. Accepts donations of unopened, non-expired food items.",
+      contact: "Email foodcloset@cpo.ucla.edu or call to arrange drop-off"
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -27,123 +73,199 @@ const DonatePage = () => {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-12 max-w-3xl">
-        <div className="text-center mb-12">
+      <main className="container mx-auto px-4 py-12 max-w-6xl">
+        {/* Hero Section */}
+        <div className="text-center mb-12 animate-fadeIn">
           <div className="text-6xl mb-4">💝</div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Donate Food</h1>
-          <p className="text-xl text-gray-600">
-            Thank you for wanting to help! Your generosity makes a real difference.
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Donate Food
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Your donation helps feed neighbors in need. Whether you're a family with extra groceries or a business with surplus food, every contribution matters.
           </p>
         </div>
 
-        {/* Coming Soon Notice */}
-        <div className="card mb-8 text-center">
-          <div className="text-5xl mb-4">🚧</div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
-            Donor Portal Coming Soon!
+        {/* Main CTA - Chat Interface */}
+        <div className="card mb-16 text-center bg-gradient-to-br from-primary-50 to-white animate-fadeIn" style={{ animationDelay: '0.1s' }}>
+          <div className="text-5xl mb-4">🤝</div>
+          <h2 className="text-3xl font-bold text-gray-900 mb-3">
+            Ready to Donate?
           </h2>
-          <p className="text-gray-600 mb-6">
-            We're building an AI-powered donation system to make it easy for grocery stores, restaurants, and individuals to donate food safely and efficiently.
-          </p>
-          <div className="bg-blue-50 p-4 rounded-lg text-left">
-            <h3 className="font-bold text-gray-900 mb-2">What we're building:</h3>
-            <ul className="space-y-2 text-gray-700">
-              <li className="flex items-start">
-                <span className="mr-2">✓</span>
-                <span>AI-guided donation process with food safety validation</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">✓</span>
-                <span>Smart matching with organizations that need your donation</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">✓</span>
-                <span>Pickup coordination and scheduling</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">✓</span>
-                <span>Impact tracking - see how many people you've helped</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Contact Options */}
-        <div className="space-y-4">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">Want to Donate Now?</h3>
-          
-          <div className="card">
-            <h4 className="font-bold text-gray-900 mb-2">🏪 Westside Food Bank</h4>
-            <p className="text-gray-600 mb-3">
-              Primary food bank serving West LA. Accepts donations from grocery stores, restaurants, and individuals.
-            </p>
-            <div className="space-y-2 text-sm">
-              <div className="flex items-center text-gray-700">
-                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                (310) 828-6016
-              </div>
-              <div className="flex items-center text-gray-700">
-                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                </svg>
-                1710 22nd St, Santa Monica, CA 90404
-              </div>
-            </div>
-            <a
-              href="https://www.wsfb.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary mt-4 inline-block"
-            >
-              Visit Website
-            </a>
-          </div>
-
-          <div className="card">
-            <h4 className="font-bold text-gray-900 mb-2">🏠 St. Joseph Center</h4>
-            <p className="text-gray-600 mb-3">
-              Serves people experiencing homelessness in West LA. Accepts food donations and coordinates with donors.
-            </p>
-            <div className="space-y-2 text-sm">
-              <div className="flex items-center text-gray-700">
-                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                (310) 396-6468
-              </div>
-              <div className="flex items-center text-gray-700">
-                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                </svg>
-                204 Hampton Drive, Venice, CA 90291
-              </div>
-            </div>
-            <a
-              href="https://stjosephctr.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary mt-4 inline-block"
-            >
-              Visit Website
-            </a>
-          </div>
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="mt-12 text-center">
-          <p className="text-gray-600 mb-4">
-            Interested in helping build the donor portal?
+          <p className="text-lg text-gray-600 mb-6 max-w-xl mx-auto">
+            Tell us what you have, and we'll connect you with organizations that need it most. Even a little goes a long way!
           </p>
           <button
-            onClick={() => navigate('/chat')}
-            className="btn-secondary"
+            onClick={() => setIsChatOpen(true)}
+            className="btn-primary text-lg px-8 py-4 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
           >
-            Contact Us Through Chat
+            Start Donation Process →
           </button>
+          <p className="text-sm text-gray-500 mt-4">
+            We support one-time and recurring donations • Food items only
+          </p>
+        </div>
+
+        {/* What We Accept */}
+        <div className="mb-16 animate-fadeIn" style={{ animationDelay: '0.2s' }}>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">What We Accept</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="card text-center">
+              <div className="text-4xl mb-3">✅</div>
+              <h3 className="font-bold text-gray-900 mb-2">Accepted</h3>
+              <ul className="text-sm text-gray-600 space-y-1 text-left">
+                <li>• Unopened packaged foods</li>
+                <li>• Fresh produce (good quality)</li>
+                <li>• Canned goods (undamaged)</li>
+                <li>• Frozen foods (kept frozen)</li>
+                <li>• Bakery items (fresh)</li>
+                <li>• Dairy (before expiration)</li>
+              </ul>
+            </div>
+            <div className="card text-center bg-red-50">
+              <div className="text-4xl mb-3">❌</div>
+              <h3 className="font-bold text-gray-900 mb-2">Not Accepted</h3>
+              <ul className="text-sm text-gray-600 space-y-1 text-left">
+                <li>• Home-cooked meals</li>
+                <li>• Expired food (>3 days)</li>
+                <li>• Opened packages</li>
+                <li>• Unlabeled items</li>
+                <li>• Improperly stored food</li>
+                <li>• Alcohol</li>
+              </ul>
+            </div>
+            <div className="card text-center bg-blue-50">
+              <div className="text-4xl mb-3">💡</div>
+              <h3 className="font-bold text-gray-900 mb-2">Most Needed</h3>
+              <ul className="text-sm text-gray-600 space-y-1 text-left">
+                <li>• Protein (canned, frozen)</li>
+                <li>• Fresh fruits & vegetables</li>
+                <li>• Whole grains & pasta</li>
+                <li>• Canned vegetables</li>
+                <li>• Peanut butter</li>
+                <li>• Baby food & formula</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Featured Organizations */}
+        <div className="animate-fadeIn" style={{ animationDelay: '0.3s' }}>
+          <h2 className="text-2xl font-bold text-gray-900 mb-3 text-center">Featured Partner Organizations</h2>
+          <p className="text-gray-600 text-center mb-8 max-w-2xl mx-auto">
+            These organizations serve different areas of West LA and accept food donations. You can coordinate directly with them or use our chat to find the best match.
+          </p>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            {featuredOrganizations.map((org) => (
+              <div key={org.id} className="card hover:shadow-xl transition-shadow">
+                {/* Area Badge */}
+                <div className="flex items-center justify-between mb-3">
+                  <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium">
+                    📍 {org.area}
+                  </span>
+                  {org.pickupAvailable && (
+                    <span className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-medium">
+                      Pickup Available
+                    </span>
+                  )}
+                </div>
+
+                {/* Organization Name */}
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{org.name}</h3>
+                <p className="text-sm text-gray-600 mb-4">{org.address}</p>
+
+                {/* Common Distributions */}
+                <div className="mb-4">
+                  <div className="text-xs font-medium text-gray-500 mb-2">COMMONLY DISTRIBUTES:</div>
+                  <div className="flex flex-wrap gap-1">
+                    {org.commonDistributions.map((item, idx) => (
+                      <span key={idx} className="px-2 py-1 bg-blue-50 text-blue-700 rounded text-xs">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Notes */}
+                <div className="mb-4 p-3 bg-gray-50 rounded text-sm text-gray-700">
+                  {org.notes}
+                </div>
+
+                {/* Contact Info */}
+                <div className="border-t border-gray-200 pt-4 space-y-2">
+                  <div className="text-xs font-medium text-gray-500 mb-2">CONTACT:</div>
+                  <a
+                    href={`tel:${org.phone.replace(/[^\d]/g, '')}`}
+                    className="flex items-center text-sm text-primary-600 hover:text-primary-700"
+                  >
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    {org.phone}
+                  </a>
+                  {org.email && (
+                    <a
+                      href={`mailto:${org.email}`}
+                      className="flex items-center text-sm text-primary-600 hover:text-primary-700"
+                    >
+                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                      {org.email}
+                    </a>
+                  )}
+                  {org.website && (
+                    <a
+                      href={org.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center text-sm text-primary-600 hover:text-primary-700"
+                    >
+                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                      </svg>
+                      Visit Website
+                    </a>
+                  )}
+                </div>
+
+                {/* Contact Button */}
+                <div className="mt-4">
+                  <p className="text-xs text-gray-600 italic">{org.contact}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Benefits Section */}
+        <div className="mt-16 card bg-gradient-to-br from-green-50 to-blue-50 animate-fadeIn" style={{ animationDelay: '0.4s' }}>
+          <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">Why Donate Food?</h3>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="text-center">
+              <div className="text-4xl mb-2">🌍</div>
+              <h4 className="font-bold text-gray-900 mb-1">Reduce Waste</h4>
+              <p className="text-sm text-gray-600">Keep good food out of landfills and help the environment</p>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl mb-2">❤️</div>
+              <h4 className="font-bold text-gray-900 mb-1">Help Neighbors</h4>
+              <p className="text-sm text-gray-600">Directly support people in your community who need food</p>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl mb-2">💪</div>
+              <h4 className="font-bold text-gray-900 mb-1">Make Impact</h4>
+              <p className="text-sm text-gray-600">Even small donations provide meals for families in need</p>
+            </div>
+          </div>
         </div>
       </main>
+
+      {/* Donor Chat Modal */}
+      <DonorChatModal 
+        isOpen={isChatOpen}
+        onClose={() => setIsChatOpen(false)}
+      />
     </div>
   );
 };

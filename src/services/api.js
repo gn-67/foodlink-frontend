@@ -1,5 +1,5 @@
 /**
- * API Service for FoodLink LA
+ * API Service for FoodLink LA - Updated with Organization Support
  * Handles all communication with the backend
  */
 
@@ -61,6 +61,7 @@ export const healthCheck = async () => {
 
 /**
  * Chat with AI Agent
+ * Updated to handle both resources and organizations in response
  */
 export const sendChatMessage = async ({
   sessionId,
@@ -133,6 +134,32 @@ export const getResourceById = async (resourceId) => {
     return response.data;
   } catch (error) {
     console.error('Get resource by ID failed:', error);
+    throw error;
+  }
+};
+
+/**
+ * Get Organizations (for donors)
+ */
+export const getOrganizations = async ({
+  area = null,
+  acceptsType = null,
+} = {}) => {
+  try {
+    const params = {};
+    
+    if (area) {
+      params.area = area;
+    }
+    
+    if (acceptsType) {
+      params.accepts_type = acceptsType;
+    }
+
+    const response = await api.get('/api/organizations', { params });
+    return response.data;
+  } catch (error) {
+    console.error('Get organizations failed:', error);
     throw error;
   }
 };

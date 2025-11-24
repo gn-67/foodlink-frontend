@@ -1,6 +1,6 @@
 /**
- * Chat Page Component
- * Main interface for chatting with the AI agent
+ * Chat Page Component - Orange Blood Theme
+ * Main interface for chatting with the AI agent with dark mode support
  */
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -8,6 +8,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { sendChatMessage, generateSessionId } from '../services/api';
 import ResourceCard from '../components/ResourceCard';
 import LoadingDots from '../components/LoadingDots';
+import ThemeToggle from '../components/ThemeToggle';
 
 const ChatPage = () => {
   const navigate = useNavigate();
@@ -34,12 +35,12 @@ const ChatPage = () => {
   }, [messages]);
 
   // Send initial urgent message if coming from emergency button
-useEffect(() => {
-  if (isUrgent && messages.length === 0) {
-    handleSendMessage('I need food right now, it\'s urgent');
-  }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [isUrgent, messages.length]); // Fixed: proper dependencies
+  useEffect(() => {
+    if (isUrgent && messages.length === 0) {
+      handleSendMessage('I need food right now, it\'s urgent');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isUrgent, messages.length]);
 
   // Focus input on mount
   useEffect(() => {
@@ -108,14 +109,17 @@ useEffect(() => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-gradient-warm dark:bg-gradient-dark flex flex-col transition-all duration-300">
+      {/* Theme Toggle */}
+      <ThemeToggle />
+
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
+      <header className="bg-white/80 dark:bg-dark-card/80 backdrop-blur-sm border-b border-primary-200 dark:border-dark-elevated sticky top-0 z-10 transition-colors duration-300">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <button
               onClick={() => navigate('/')}
-              className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
+              className="flex items-center space-x-2 text-gray-600 dark:text-dark-muted hover:text-gray-900 dark:hover:text-dark-text transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -125,8 +129,8 @@ useEffect(() => {
             <div className="flex items-center space-x-2">
               <div className="text-2xl">🤖</div>
               <div>
-                <h1 className="font-bold text-gray-900">Food Assistant</h1>
-                <p className="text-xs text-gray-500">AI-powered help</p>
+                <h1 className="font-bold text-gray-900 dark:text-dark-text">Food Assistant</h1>
+                <p className="text-xs text-gray-500 dark:text-dark-muted">AI-powered help</p>
               </div>
             </div>
             <div className="w-16"></div> {/* Spacer for centering */}
@@ -141,10 +145,10 @@ useEffect(() => {
           {messages.length === 0 && !isUrgent && (
             <div className="text-center py-12 animate-fadeIn">
               <div className="text-6xl mb-4">👋</div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-dark-text mb-2">
                 Hi! I'm here to help you find food.
               </h2>
-              <p className="text-gray-600 max-w-md mx-auto mb-6">
+              <p className="text-gray-600 dark:text-dark-muted max-w-md mx-auto mb-6">
                 Tell me where you are and what you need. I can help you find food pantries, meal services, and other resources nearby.
               </p>
               
@@ -188,7 +192,7 @@ useEffect(() => {
             {/* Loading Indicator */}
             {isLoading && (
               <div className="flex justify-start animate-fadeIn">
-                <div className="bg-gray-200 rounded-2xl rounded-bl-sm px-4 py-3">
+                <div className="bg-white/90 dark:bg-dark-elevated/90 backdrop-blur-sm rounded-2xl rounded-bl-sm px-4 py-3 border border-gray-200/50 dark:border-dark-elevated">
                   <LoadingDots />
                 </div>
               </div>
@@ -197,12 +201,12 @@ useEffect(() => {
             {/* Resources Section */}
             {resources.length > 0 && (
               <div className="animate-fadeIn">
-                <div className="bg-primary-50 rounded-lg p-4 mb-4">
-                  <h3 className="font-bold text-gray-900 mb-2 flex items-center">
+                <div className="bg-primary-50/80 dark:bg-primary-900/20 backdrop-blur-sm rounded-lg p-4 mb-4 border border-primary-200/50 dark:border-primary-800/50">
+                  <h3 className="font-bold text-gray-900 dark:text-dark-text mb-2 flex items-center">
                     <span className="text-xl mr-2">📍</span>
                     Food Resources Near You
                   </h3>
-                  <p className="text-sm text-gray-600 mb-4">
+                  <p className="text-sm text-gray-600 dark:text-dark-muted mb-4">
                     Found {resources.length} resource{resources.length !== 1 ? 's' : ''} that can help
                   </p>
                   <div className="space-y-4">
@@ -220,7 +224,7 @@ useEffect(() => {
       </div>
 
       {/* Input Area */}
-      <div className="bg-white border-t border-gray-200 sticky bottom-0">
+      <div className="bg-white/80 dark:bg-dark-card/80 backdrop-blur-sm border-t border-primary-200 dark:border-dark-elevated sticky bottom-0 transition-colors duration-300">
         <div className="container mx-auto px-4 py-4 max-w-4xl">
           <div className="flex space-x-2">
             <input
@@ -243,7 +247,7 @@ useEffect(() => {
               </svg>
             </button>
           </div>
-          <p className="text-xs text-gray-500 mt-2 text-center">
+          <p className="text-xs text-gray-500 dark:text-dark-muted mt-2 text-center">
             Powered by Claude AI • Your conversation is private
           </p>
         </div>

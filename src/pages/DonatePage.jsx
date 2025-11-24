@@ -6,6 +6,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DonorChatModal from '../components/DonorChatModal';
+import ThemeToggle from '../components/ThemeToggle';
 
 const DonatePage = () => {
   const navigate = useNavigate();
@@ -56,13 +57,15 @@ const DonatePage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-warm dark:bg-gradient-dark transition-all duration-300">
+      {/* Theme Toggle */}
+      <ThemeToggle />
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
+      <header className="bg-white/80 dark:bg-dark-card/80 backdrop-blur-sm border-b border-primary-200 dark:border-dark-elevated transition-colors duration-300">
         <div className="container mx-auto px-4 py-4">
           <button
             onClick={() => navigate('/')}
-            className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
+            className="flex items-center space-x-2 text-gray-600 dark:text-dark-muted hover:text-gray-900 dark:hover:text-dark-text transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -77,21 +80,21 @@ const DonatePage = () => {
         {/* Hero Section */}
         <div className="text-center mb-12 animate-fadeIn">
           <div className="text-6xl mb-4">💝</div>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-dark-text mb-4">
             Donate Food
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-dark-muted max-w-2xl mx-auto">
             Your donation helps feed neighbors in need. Whether you're a family with extra groceries or a business with surplus food, every contribution matters.
           </p>
         </div>
 
         {/* Main CTA - Chat Interface */}
-        <div className="card mb-16 text-center bg-gradient-to-br from-primary-50 to-white animate-fadeIn" style={{ animationDelay: '0.1s' }}>
+        <div className="card mb-16 text-center bg-gradient-to-br from-primary-50 to-white dark:from-primary-900/20 dark:to-dark-card animate-fadeIn" style={{ animationDelay: '0.1s' }}>
           <div className="text-5xl mb-4">🤝</div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-3">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-dark-text mb-3">
             Ready to Donate?
           </h2>
-          <p className="text-lg text-gray-600 mb-6 max-w-xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-dark-muted mb-6 max-w-xl mx-auto">
             Tell us what you have, and we'll connect you with organizations that need it most. Even a little goes a long way!
           </p>
           <button
@@ -107,12 +110,12 @@ const DonatePage = () => {
 
         {/* What We Accept */}
         <div className="mb-16 animate-fadeIn" style={{ animationDelay: '0.2s' }}>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">What We Accept</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-dark-text mb-6 text-center">What We Accept</h2>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="card text-center">
               <div className="text-4xl mb-3">✅</div>
-              <h3 className="font-bold text-gray-900 mb-2">Accepted</h3>
-              <ul className="text-sm text-gray-600 space-y-1 text-left">
+              <h3 className="font-bold text-gray-900 dark:text-dark-text mb-2">Accepted</h3>
+              <ul className="text-sm text-gray-600 dark:text-dark-muted space-y-1 text-left">
                 <li>• Unopened packaged foods</li>
                 <li>• Fresh produce (good quality)</li>
                 <li>• Canned goods (undamaged)</li>
@@ -121,10 +124,10 @@ const DonatePage = () => {
                 <li>• Dairy (before expiration)</li>
               </ul>
             </div>
-            <div className="card text-center bg-red-50">
+            <div className="card text-center bg-red-50 dark:bg-red-900/20">
               <div className="text-4xl mb-3">❌</div>
-              <h3 className="font-bold text-gray-900 mb-2">Not Accepted</h3>
-              <ul className="text-sm text-gray-600 space-y-1 text-left">
+              <h3 className="font-bold text-gray-900 dark:text-dark-text mb-2">Not Accepted</h3>
+              <ul className="text-sm text-gray-600 dark:text-dark-muted space-y-1 text-left">
                 <li>• Home-cooked meals</li>
                 <li>• Expired food (>3 days)</li>
                 <li>• Opened packages</li>
@@ -133,10 +136,10 @@ const DonatePage = () => {
                 <li>• Alcohol</li>
               </ul>
             </div>
-            <div className="card text-center bg-blue-50">
+            <div className="card text-center bg-blue-50 dark:bg-accent-900/20">
               <div className="text-4xl mb-3">💡</div>
-              <h3 className="font-bold text-gray-900 mb-2">Most Needed</h3>
-              <ul className="text-sm text-gray-600 space-y-1 text-left">
+              <h3 className="font-bold text-gray-900 dark:text-dark-text mb-2">Most Needed</h3>
+              <ul className="text-sm text-gray-600 dark:text-dark-muted space-y-1 text-left">
                 <li>• Protein (canned, frozen)</li>
                 <li>• Fresh fruits & vegetables</li>
                 <li>• Whole grains & pasta</li>
@@ -150,17 +153,17 @@ const DonatePage = () => {
 
         {/* Featured Organizations */}
         <div className="animate-fadeIn" style={{ animationDelay: '0.3s' }}>
-          <h2 className="text-2xl font-bold text-gray-900 mb-3 text-center">Featured Partner Organizations</h2>
-          <p className="text-gray-600 text-center mb-8 max-w-2xl mx-auto">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-dark-text mb-3 text-center">Featured Partner Organizations</h2>
+          <p className="text-gray-600 dark:text-dark-muted text-center mb-8 max-w-2xl mx-auto">
             These organizations serve different areas of West LA and accept food donations. You can coordinate directly with them or use our chat to find the best match.
           </p>
           
           <div className="grid md:grid-cols-3 gap-6">
             {featuredOrganizations.map((org) => (
-              <div key={org.id} className="card hover:shadow-xl transition-shadow">
+              <div key={org.id} className="card hover:shadow-xl dark:hover:shadow-primary-500/30 transition-shadow">
                 {/* Area Badge */}
                 <div className="flex items-center justify-between mb-3">
-                  <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium">
+                  <span className="px-3 py-1 bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-400 rounded-full text-sm font-medium">
                     📍 {org.area}
                   </span>
                   {org.pickupAvailable && (
@@ -171,15 +174,15 @@ const DonatePage = () => {
                 </div>
 
                 {/* Organization Name */}
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{org.name}</h3>
-                <p className="text-sm text-gray-600 mb-4">{org.address}</p>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-dark-text mb-2">{org.name}</h3>
+                <p className="text-sm text-gray-600 dark:text-dark-muted mb-4">{org.address}</p>
 
                 {/* Common Distributions */}
                 <div className="mb-4">
-                  <div className="text-xs font-medium text-gray-500 mb-2">COMMONLY DISTRIBUTES:</div>
+                  <div className="text-xs font-medium text-gray-500 dark:text-dark-muted mb-2">COMMONLY DISTRIBUTES:</div>
                   <div className="flex flex-wrap gap-1">
                     {org.commonDistributions.map((item, idx) => (
-                      <span key={idx} className="px-2 py-1 bg-blue-50 text-blue-700 rounded text-xs">
+                      <span key={idx} className="px-2 py-1 bg-blue-50 dark:bg-accent-900/30 text-blue-700 dark:text-accent-400 rounded text-xs">
                         {item}
                       </span>
                     ))}
@@ -187,16 +190,16 @@ const DonatePage = () => {
                 </div>
 
                 {/* Notes */}
-                <div className="mb-4 p-3 bg-gray-50 rounded text-sm text-gray-700">
+                <div className="mb-4 p-3 bg-gray-50 dark:bg-dark-elevated/50 rounded text-sm text-gray-700 dark:text-dark-muted">
                   {org.notes}
                 </div>
 
                 {/* Contact Info */}
-                <div className="border-t border-gray-200 pt-4 space-y-2">
-                  <div className="text-xs font-medium text-gray-500 mb-2">CONTACT:</div>
+                <div className="border-t border-gray-200 dark:border-dark-elevated pt-4 space-y-2">
+                  <div className="text-xs font-medium text-gray-500 dark:text-dark-muted mb-2">CONTACT:</div>
                   <a
                     href={`tel:${org.phone.replace(/[^\d]/g, '')}`}
-                    className="flex items-center text-sm text-primary-600 hover:text-primary-700"
+                    className="flex items-center text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300"
                   >
                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -206,7 +209,7 @@ const DonatePage = () => {
                   {org.email && (
                     <a
                       href={`mailto:${org.email}`}
-                      className="flex items-center text-sm text-primary-600 hover:text-primary-700"
+                      className="flex items-center text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300"
                     >
                       <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -219,7 +222,7 @@ const DonatePage = () => {
                       href={org.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center text-sm text-primary-600 hover:text-primary-700"
+                      className="flex items-center text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300"
                     >
                       <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
@@ -231,7 +234,7 @@ const DonatePage = () => {
 
                 {/* Contact Button */}
                 <div className="mt-4">
-                  <p className="text-xs text-gray-600 italic">{org.contact}</p>
+                  <p className="text-xs text-gray-600 dark:text-dark-muted italic">{org.contact}</p>
                 </div>
               </div>
             ))}
@@ -239,23 +242,23 @@ const DonatePage = () => {
         </div>
 
         {/* Benefits Section */}
-        <div className="mt-16 card bg-gradient-to-br from-green-50 to-blue-50 animate-fadeIn" style={{ animationDelay: '0.4s' }}>
-          <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">Why Donate Food?</h3>
+        <div className="mt-16 card bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-900/20 dark:to-accent-900/20 animate-fadeIn" style={{ animationDelay: '0.4s' }}>
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-dark-text mb-4 text-center">Why Donate Food?</h3>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="text-center">
               <div className="text-4xl mb-2">🌍</div>
-              <h4 className="font-bold text-gray-900 mb-1">Reduce Waste</h4>
-              <p className="text-sm text-gray-600">Keep good food out of landfills and help the environment</p>
+              <h4 className="font-bold text-gray-900 dark:text-dark-text mb-1">Reduce Waste</h4>
+              <p className="text-sm text-gray-600 dark:text-dark-muted">Keep good food out of landfills and help the environment</p>
             </div>
             <div className="text-center">
               <div className="text-4xl mb-2">❤️</div>
-              <h4 className="font-bold text-gray-900 mb-1">Help Neighbors</h4>
-              <p className="text-sm text-gray-600">Directly support people in your community who need food</p>
+              <h4 className="font-bold text-gray-900 dark:text-dark-text mb-1">Help Neighbors</h4>
+              <p className="text-sm text-gray-600 dark:text-dark-muted">Directly support people in your community who need food</p>
             </div>
             <div className="text-center">
               <div className="text-4xl mb-2">💪</div>
-              <h4 className="font-bold text-gray-900 mb-1">Make Impact</h4>
-              <p className="text-sm text-gray-600">Even small donations provide meals for families in need</p>
+              <h4 className="font-bold text-gray-900 dark:text-dark-text mb-1">Make Impact</h4>
+              <p className="text-sm text-gray-600 dark:text-dark-muted">Even small donations provide meals for families in need</p>
             </div>
           </div>
         </div>

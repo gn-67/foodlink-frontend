@@ -114,20 +114,20 @@ const DonorChatModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col">
+    <div className="fixed inset-0 bg-black/50 dark:bg-black/70 z-50 flex items-center justify-center p-4 transition-colors duration-300">
+      <div className="bg-white/95 dark:bg-dark-card/95 backdrop-blur-md rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col transition-colors duration-300">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200">
+        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-dark-elevated">
           <div className="flex items-center space-x-3">
             <div className="text-3xl">💝</div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">Donation Assistant</h2>
-              <p className="text-sm text-gray-500">We'll help connect you with organizations</p>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-dark-text">Donation Assistant</h2>
+              <p className="text-sm text-gray-500 dark:text-dark-muted">We'll help connect you with organizations</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors"
+            className="text-gray-400 dark:text-dark-muted hover:text-gray-600 dark:hover:text-dark-text transition-colors"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -151,7 +151,7 @@ const DonorChatModal = ({ isOpen, onClose }) => {
           {/* Loading Indicator */}
           {isLoading && (
             <div className="flex justify-start animate-fadeIn">
-              <div className="bg-gray-200 rounded-2xl rounded-bl-sm px-4 py-3">
+              <div className="bg-white/90 dark:bg-dark-elevated/90 backdrop-blur-sm rounded-2xl rounded-bl-sm px-4 py-3 border border-gray-200/50 dark:border-dark-elevated">
                 <LoadingDots />
               </div>
             </div>
@@ -160,7 +160,7 @@ const DonorChatModal = ({ isOpen, onClose }) => {
           {/* Quick Replies (show only at start) */}
           {messages.length === 1 && !isLoading && (
             <div className="animate-fadeIn">
-              <p className="text-sm text-gray-500 mb-2">Quick options:</p>
+              <p className="text-sm text-gray-500 dark:text-dark-muted mb-2">Quick options:</p>
               <div className="flex flex-wrap gap-2">
                 {quickReplies.map((reply, index) => (
                   <button
@@ -178,12 +178,12 @@ const DonorChatModal = ({ isOpen, onClose }) => {
           {/* Matched Organizations */}
           {matchedOrganizations.length > 0 && (
             <div className="animate-fadeIn">
-              <div className="bg-green-50 rounded-lg p-4 mb-4">
-                <h3 className="font-bold text-gray-900 mb-2 flex items-center">
+              <div className="bg-green-50/80 dark:bg-green-900/20 backdrop-blur-sm rounded-lg p-4 mb-4 border border-green-200/50 dark:border-green-800/50">
+                <h3 className="font-bold text-gray-900 dark:text-dark-text mb-2 flex items-center">
                   <span className="text-xl mr-2">✅</span>
                   Matched Organizations for Your Donation
                 </h3>
-                <p className="text-sm text-gray-600 mb-4">
+                <p className="text-sm text-gray-600 dark:text-dark-muted mb-4">
                   These organizations can accept what you're offering. Contact them directly to coordinate pickup or drop-off.
                 </p>
                 <div className="space-y-4">
@@ -199,7 +199,7 @@ const DonorChatModal = ({ isOpen, onClose }) => {
         </div>
 
         {/* Input Area */}
-        <div className="border-t border-gray-200 p-6">
+        <div className="border-t border-gray-200 dark:border-dark-elevated p-6">
           <div className="flex space-x-2">
             <input
               ref={inputRef}
@@ -221,7 +221,7 @@ const DonorChatModal = ({ isOpen, onClose }) => {
               </svg>
             </button>
           </div>
-          <p className="text-xs text-gray-500 mt-2 text-center">
+          <p className="text-xs text-gray-500 dark:text-dark-muted mt-2 text-center">
             We'll connect you with organizations - you coordinate pickup/drop-off directly with them
           </p>
         </div>
